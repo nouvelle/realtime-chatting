@@ -37,7 +37,7 @@ const server = app.listen(process.env.PORT || 4000, '0.0.0.0', () => {
 const io = require('socket.io')(server, { origins: '*:*' });
 
 // socketイベントの設定
-io.on('connection', (socket) => {
+io.on('connection', socket => {
   console.log('connected:', socket.id);
 
   // 切断時
@@ -46,8 +46,8 @@ io.on('connection', (socket) => {
   });
 
   // ユーザの参加
-  socket.on('send', (message) => {
-    console.log('send:', message);
-    io.emit('send', message);
+  socket.on('send', message => {
+    console.log('send:', message.name + ': ' + message.text);
+    io.emit('send', message.name + ': ' + message.text);
   });
 });

@@ -7,8 +7,8 @@ import VueTypes from 'vue-types';
 
 export default {
   props: {
-    message: VueTypes.string.isRequired
-  }
+    message: VueTypes.string.isRequired,
+  },
 };
 </script>
 

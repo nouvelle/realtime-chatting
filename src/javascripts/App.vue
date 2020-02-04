@@ -1,12 +1,15 @@
 <template>
   <div>
     <p>
-      <img class="logo" src="../images/logo.jpg" alt="ロゴ">
+      <img class="logo" src="../images/logo.jpg" alt="ロゴ" />
       <span class="sample">サンプルコード</span>
     </p>
     <MyComponent :message="$data.message" />
     <form @submit="onSubmit">
-      <input v-model="$data.text" type="text">
+      Name:
+      <input v-model="$data.inputData.name" type="text" />
+      Message:
+      <input v-model="$data.inputData.text" type="text" />
       <button type="submit">送信</button>
     </form>
   </div>
@@ -20,12 +23,15 @@ import MyComponent from './components/MyComponent.vue';
 
 export default {
   components: {
-    MyComponent
+    MyComponent,
   },
   data() {
     return {
       message: '',
-      text: ''
+      inputData: {
+        text: '',
+        name: '',
+      },
     };
   },
   created() {
@@ -33,7 +39,7 @@ export default {
       console.log('connected!');
     });
 
-    socket.on('send', (message) => {
+    socket.on('send', message => {
       console.log(message);
       this.$data.message = message;
     });
@@ -44,9 +50,10 @@ export default {
      */
     onSubmit(e) {
       e.preventDefault();
-      socket.emit('send', this.$data.text);
-    }
-  }
+      console.log(this.$data.inputData);
+      socket.emit('send', this.$data.inputData);
+    },
+  },
 };
 </script>
 

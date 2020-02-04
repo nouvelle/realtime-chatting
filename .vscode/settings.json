@@ -9,5 +9,7 @@
   ],
 
   // veturのバリデーションが余計なことをしていたのでoffにする（普通のeslintでチェックする）
-  "vetur.validation.template": false
+  "vetur.validation.template": false,
+  "prettier.singleQuote": true,
+  "javascript.preferences.quoteStyle": "single"
 }
