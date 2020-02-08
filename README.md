@@ -1,29 +1,42 @@
-# online-skillup
+# Realtime Chat
 
-Frontend オンラインスキルアップ
+![demo](https://user-images.githubusercontent.com/5979966/74083136-15429b00-4aa4-11ea-800f-1b158c7c5bcb.gif)
+
+Vue.js + websocket を使用して作ったリアルタイムチャットです。
+
+- 環境はこちら  
+  [https://realtime-chatting-app.herokuapp.com/](https://realtime-chatting-app.herokuapp.com/)
+
+- 参考： [Frontend オンラインスキルアップ](https://team-lab.github.io/skillup-nodejs/)
 
 ## 環境
-+ node: 10.15.0
-+ npm: 6.2.0以上
+
+- node: 10.15.0
+- npm: 6.2.0 以上
 
 ## パッケージのインストール
+
 `$ npm install`
 
 ## ローカルでの開発
-ローカルで開発するときは以下の2つのコマンドを2つのターミナルを使って実行する。
+
+ローカルで開発するときは以下の 2 つのコマンドを 2 つのターミナルを使って実行する。
 
 ### フロントエンドサーバーの立ち上げ
-`$ npm start`  
-[http://localhost:3000](http://localhost:3000)にアクセスしてフロントエンドの開発をする。  
 
-### websocketサーバーの立ち上げ
+`$ npm start`  
+[http://localhost:3000](http://localhost:3000)にアクセスしてフロントエンドの開発をする。
+
+### websocket サーバーの立ち上げ
+
 別のターミナルを開いて、以下を実行する。  
 `$ npm run server`  
-実行すると[http://localhost:4000](http://localhost:4000)にsocketサーバーが立ち上がる。  
+実行すると[http://localhost:4000](http://localhost:4000)に socket サーバーが立ち上がる。  
 ここへの接続は既に設定されているため特に設定する必要はない。
-開発中はここにアクセスしてもエラーになるが、フロントエンドのコードをビルドするとビルドされたファイルが表示される。  
+開発中はここにアクセスしてもエラーになるが、フロントエンドのコードをビルドするとビルドされたファイルが表示される。
 
 ## ディレクトリ構成
+
 ```
 .
 ├── server/          # サーバーを設定するディレクトリ
@@ -59,7 +72,9 @@ Frontend オンラインスキルアップ
 ```
 
 ## その他のコマンド
+
 ### フロントエンドのコードのビルド
+
 `$ npm run build`  
-server/public以下に生成物を配置する。  
+server/public 以下に生成物を配置する。  
 生成物が配置されたことで、`$ npm run server`を実行している時は[http://localhost:4000](http://localhost:4000)にアクセスするとビルドしたファイルを見ることができる。
