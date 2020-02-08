@@ -57,6 +57,7 @@ export default {
           text: this.$data.text,
         });
       }
+      this.$data.text = '';
     },
   },
 };
@@ -64,6 +65,7 @@ export default {
 
 <style lang="scss" scoped>
 * {
+  font-family: 'Ubuntu', sans-serif;
   outline: none;
 }
 

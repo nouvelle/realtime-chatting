@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <div v-for="data in $props.message">{{ data.name}}: {{data.text}}</div>
+  <div class="wrapMessage">
+    <div v-for="data in $props.message" class="message">
+      <div class="name">{{ data.name }}</div>
+      <div class="text">{{ data.text }}</div>
+    </div>
   </div>
 </template>
 
@@ -21,5 +24,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-//
+.wrapMessage {
+  width: 100%;
+  margin: 15px 10px;
+}
+
+.message {
+  width: 90%;
+  background: #fff;
+  margin: 5px 0;
+  padding: 15px 10px;
+  border: 1px solid #aaa;
+}
+
+.text {
+  padding-top: 5px;
+  padding-left: 10px;
+}
 </style>
