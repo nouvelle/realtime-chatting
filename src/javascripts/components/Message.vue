@@ -1,8 +1,16 @@
 <template>
   <div class="wrapMessage">
-    <div v-for="data in $props.message" class="message">
-      <div class="name">{{ data.name }}</div>
-      <div class="text">{{ data.text }}</div>
+    <div v-for="data in $props.message">
+      <div v-if="data.status === 'send'" class="message">
+        <div class="name">{{ data.name }}</div>
+        <div class="text">{{ data.text }}</div>
+      </div>
+      <div v-else-if="data.status === 'connect'" class="messageSys">
+        <div class="info">ユーザが参加しました ({{ data.text }})</div>
+      </div>
+      <div v-else-if="data.status === 'disconnect'" class="messageSys">
+        <div class="info">ユーザが退出しました ({{ data.text }})</div>
+      </div>
     </div>
   </div>
 </template>
@@ -15,6 +23,7 @@ export default {
   props: {
     message: VueTypes.arrayOf(
       VueTypes.shape({
+        status: VueTypes.string,
         text: VueTypes.string,
         name: VueTypes.string,
       })
@@ -30,15 +39,31 @@ export default {
 }
 
 .message {
-  width: 90%;
+  width: 95%;
+  box-sizing: border-box;
   background: #fff;
   margin: 5px 0;
-  padding: 15px 10px;
+  padding: 10px;
+  border: 1px solid #aaa;
+}
+
+.messageSys {
+  width: 95%;
+  box-sizing: border-box;
+  background: #aaa;
+  margin: 5px 0;
+  padding: 5px;
   border: 1px solid #aaa;
 }
 
 .text {
   padding-top: 5px;
   padding-left: 10px;
+}
+
+.info {
+  font-size: 14px;
+  color: #333;
+  background: #aaa;
 }
 </style>

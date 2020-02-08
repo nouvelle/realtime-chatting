@@ -40,6 +40,27 @@ export default {
       console.log('connected!');
     });
 
+    // コネクト時
+    socket.on('connected', data => {
+      console.log('connected', data);
+      this.$data.inputData.unshift({
+        status: 'connect',
+        name: 'system',
+        text: data,
+        date: new Date(),
+      });
+    });
+    // disコネクト時
+    socket.on('disconnected', data => {
+      console.log('disconnected', data);
+      this.$data.inputData.unshift({
+        status: 'disconnect',
+        name: 'system',
+        text: data,
+        date: new Date(),
+      });
+    });
+
     socket.on('send', message => {
       this.$data.inputData.unshift(message);
     });
@@ -53,8 +74,10 @@ export default {
       if (this.$data.name && this.$data.text) {
         console.log(this.$data.name, this.$data.text);
         socket.json.emit('send', {
+          status: 'send',
           name: this.$data.name,
           text: this.$data.text,
+          date: new Date(),
         });
       }
       this.$data.text = '';

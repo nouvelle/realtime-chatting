@@ -40,10 +40,12 @@ const io = require('socket.io')(server, { origins: '*:*' });
 io.on('connection', socket => {
   // ユーザ参加時（接続時）
   console.log('connected:', socket.id);
+  io.emit('connected', socket.id);
 
   // 切断時
   socket.on('disconnect', () => {
     console.log('disconnected:', socket.id);
+    io.emit('disconnected', socket.id);
   });
 
   // ユーザのメッセージ送信
