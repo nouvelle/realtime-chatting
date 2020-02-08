@@ -4,14 +4,14 @@
       <img class="logo" src="../images/logo.jpg" alt="ロゴ" />
       <span class="sample">サンプルコード</span>
     </p>
-    <MyComponent :message="$data.message" />
     <form @submit="onSubmit">
       Name:
-      <input v-model="$data.inputData.name" type="text" />
+      <input v-model="$data.name" type="text" />
       Message:
-      <input v-model="$data.inputData.text" type="text" />
+      <input v-model="$data.text" type="text" />
       <button type="submit">送信</button>
     </form>
+    <Message :message="$data.inputData" />
   </div>
 </template>
 
@@ -19,19 +19,17 @@
 import socket from './utils/socket';
 
 // components
-import MyComponent from './components/MyComponent.vue';
+import Message from './components/Message.vue';
 
 export default {
   components: {
-    MyComponent,
+    Message,
   },
   data() {
     return {
-      message: '',
-      inputData: {
-        text: '',
-        name: '',
-      },
+      name: '',
+      text: '',
+      inputData: [],
     };
   },
   created() {
@@ -40,8 +38,7 @@ export default {
     });
 
     socket.on('send', message => {
-      console.log(message);
-      this.$data.message = message;
+      this.$data.inputData.unshift(message);
     });
   },
   methods: {
@@ -50,8 +47,11 @@ export default {
      */
     onSubmit(e) {
       e.preventDefault();
-      console.log(this.$data.inputData);
-      socket.emit('send', this.$data.inputData);
+      console.log(this.$data.name, this.$data.text);
+      socket.json.emit('send', {
+        name: this.$data.name,
+        text: this.$data.text,
+      });
     },
   },
 };

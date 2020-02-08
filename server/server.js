@@ -38,6 +38,7 @@ const io = require('socket.io')(server, { origins: '*:*' });
 
 // socketイベントの設定
 io.on('connection', socket => {
+  // ユーザ参加時（接続時）
   console.log('connected:', socket.id);
 
   // 切断時
@@ -45,9 +46,9 @@ io.on('connection', socket => {
     console.log('disconnected:', socket.id);
   });
 
-  // ユーザの参加
+  // ユーザのメッセージ送信
   socket.on('send', message => {
-    console.log('send:', message.name + ': ' + message.text);
-    io.emit('send', message.name + ': ' + message.text);
+    console.log('send:', message);
+    io.emit('send', message);
   });
 });
