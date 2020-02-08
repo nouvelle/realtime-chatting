@@ -40,17 +40,28 @@ const io = require('socket.io')(server, { origins: '*:*' });
 io.on('connection', socket => {
   // ユーザ参加時（接続時）
   console.log('connected:', socket.id);
-  io.emit('connected', socket.id);
+  io.emit('connected', {
+    id: socket.id,
+    date: moment().format('YYYY/MM/DD HH:mm:ss'),
+  });
 
   // 切断時
   socket.on('disconnect', () => {
     console.log('disconnected:', socket.id);
-    io.emit('disconnected', socket.id);
+    io.emit('disconnected', {
+      id: socket.id,
+      date: moment().format('YYYY/MM/DD HH:mm:ss'),
+    });
   });
 
   // ユーザのメッセージ送信
   socket.on('send', message => {
     console.log('send:', message);
-    io.emit('send', message);
+    io.emit('send', {
+      date: moment().format('YYYY/MM/DD HH:mm:ss'),
+      name: message.name,
+      status: message.status,
+      text: message.text,
+    });
   });
 });

@@ -2,13 +2,18 @@
   <div class="wrapMessage">
     <div v-for="data in $props.message">
       <div v-if="data.status === 'send'" class="message">
-        <div class="name">{{ data.name }}</div>
+        <div class="messageHeader">
+          <div class="name">{{ data.name }}</div>
+          <div class="date">{{ data.date }}</div>
+        </div>
         <div class="text">{{ data.text }}</div>
       </div>
       <div v-else-if="data.status === 'connect'" class="messageSys">
+        <div class="date">{{ data.date }}</div>
         <div class="info">ユーザが参加しました ({{ data.text }})</div>
       </div>
       <div v-else-if="data.status === 'disconnect'" class="messageSys">
+        <div class="date">{{ data.date }}</div>
         <div class="info">ユーザが退出しました ({{ data.text }})</div>
       </div>
     </div>
@@ -23,9 +28,10 @@ export default {
   props: {
     message: VueTypes.arrayOf(
       VueTypes.shape({
+        date: VueTypes.string,
+        name: VueTypes.string,
         status: VueTypes.string,
         text: VueTypes.string,
-        name: VueTypes.string,
       })
     ),
   },
@@ -36,6 +42,11 @@ export default {
 .wrapMessage {
   width: 100%;
   margin: 15px 10px;
+}
+
+.messageHeader {
+  display: flex;
+  justify-content: space-between;
 }
 
 .message {
@@ -52,7 +63,7 @@ export default {
   box-sizing: border-box;
   background: #aaa;
   margin: 5px 0;
-  padding: 5px;
+  padding: 10px;
   border: 1px solid #aaa;
 }
 
@@ -61,9 +72,15 @@ export default {
   padding-left: 10px;
 }
 
-.info {
-  font-size: 14px;
+.date {
+  padding-bottom: 5px;
+  font-size: 12px;
   color: #333;
-  background: #aaa;
+  text-align: right;
+}
+
+.info {
+  font-size: 12px;
+  color: #333;
 }
 </style>

@@ -46,8 +46,8 @@ export default {
       this.$data.inputData.unshift({
         status: 'connect',
         name: 'system',
-        text: data,
-        date: new Date(),
+        text: data.id,
+        date: data.date,
       });
     });
     // disコネクト時
@@ -56,8 +56,8 @@ export default {
       this.$data.inputData.unshift({
         status: 'disconnect',
         name: 'system',
-        text: data,
-        date: new Date(),
+        text: data.id,
+        date: data.date,
       });
     });
 
