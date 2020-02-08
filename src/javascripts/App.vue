@@ -14,6 +14,7 @@
       </div>
       <button type="submit" class="btn">送信</button>
     </form>
+    <p class="clientNum">現在の接続数：{{ $data.clientNum }}</p>
     <Message :message="$data.inputData" />
   </div>
 </template>
@@ -32,6 +33,7 @@ export default {
     return {
       name: '',
       text: '',
+      clientNum: 0,
       inputData: [],
     };
   },
@@ -43,6 +45,7 @@ export default {
     // コネクト時
     socket.on('connected', data => {
       console.log('connected', data);
+      this.clientNum = data.clientNum;
       this.$data.inputData.unshift({
         status: 'connect',
         name: 'system',
@@ -53,6 +56,7 @@ export default {
     // disコネクト時
     socket.on('disconnected', data => {
       console.log('disconnected', data);
+      this.clientNum = data.clientNum;
       this.$data.inputData.unshift({
         status: 'disconnect',
         name: 'system',
@@ -143,7 +147,10 @@ input:focus {
   border-bottom: none;
 }
 
-.sample {
-  color: $red;
+.clientNum {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  text-align: right;
 }
 </style>

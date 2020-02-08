@@ -40,17 +40,21 @@ const io = require('socket.io')(server, { origins: '*:*' });
 io.on('connection', socket => {
   // ユーザ参加時（接続時）
   console.log('connected:', socket.id);
+  console.log('コネクション数:', socket.client.conn.server.clientsCount);
   io.emit('connected', {
     id: socket.id,
     date: moment().format('YYYY/MM/DD HH:mm:ss'),
+    clientNum: socket.client.conn.server.clientsCount,
   });
 
   // 切断時
   socket.on('disconnect', () => {
     console.log('disconnected:', socket.id);
+    console.log('コネクション数:', socket.client.conn.server.clientsCount);
     io.emit('disconnected', {
       id: socket.id,
       date: moment().format('YYYY/MM/DD HH:mm:ss'),
+      clientNum: socket.client.conn.server.clientsCount,
     });
   });
 
@@ -62,6 +66,7 @@ io.on('connection', socket => {
       name: message.name,
       status: message.status,
       text: message.text,
+      clientNum: socket.client.conn.server.clientsCount,
     });
   });
 });

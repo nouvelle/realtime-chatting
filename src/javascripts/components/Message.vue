@@ -41,7 +41,7 @@ export default {
 <style lang="scss" scoped>
 .wrapMessage {
   width: 100%;
-  margin: 15px 10px;
+  margin: 0 15px 10px;
 }
 
 .messageHeader {
