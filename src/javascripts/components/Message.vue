@@ -64,7 +64,7 @@ export default {
   background: #aaa;
   margin: 5px 0;
   padding: 10px;
-  border: 1px solid #aaa;
+  border: 1px dotted #aaa;
 }
 
 .text {

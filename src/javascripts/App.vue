@@ -5,11 +5,11 @@
     </p>
     <form @submit="onSubmit">
       <div class="wrapInput">
-        <label class="inputTitle">Name</label>
+        <div class="inputTitle">Name</div>
         <input v-model="$data.name" type="text" />
       </div>
       <div class="wrapInput">
-        <label class="inputTitle">Message</label>
+        <div class="inputTitle">Message</div>
         <input v-model="$data.text" type="text" />
       </div>
       <button type="submit" class="btn">送信</button>
@@ -93,7 +93,7 @@ export default {
 }
 
 .wrap {
-  margin: 20px;
+  margin: 10px;
 }
 
 .logo {
@@ -106,7 +106,7 @@ export default {
 }
 
 .wrapInput {
-  height: 35px;
+  margin-bottom: 5px;
 }
 
 .inputTitle {
@@ -121,7 +121,7 @@ form {
 input {
   padding: 5px;
   border: solid 1px #ccc;
-  width: 250px;
+  width: 90%;
 }
 
 input:focus {
