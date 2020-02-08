@@ -1,15 +1,18 @@
 <template>
-  <div>
-    <p>
-      <img class="logo" src="../images/logo.jpg" alt="ロゴ" />
-      <span class="sample">サンプルコード</span>
+  <div class="wrap">
+    <p class="header">
+      <img class="logo" src="../images/icon.png" alt="キャラクター" />
     </p>
     <form @submit="onSubmit">
-      Name:
-      <input v-model="$data.name" type="text" />
-      Message:
-      <input v-model="$data.text" type="text" />
-      <button type="submit">送信</button>
+      <div class="wrapInput">
+        <label class="inputTitle">Name</label>
+        <input v-model="$data.name" type="text" />
+      </div>
+      <div class="wrapInput">
+        <label class="inputTitle">Message</label>
+        <input v-model="$data.text" type="text" />
+      </div>
+      <button type="submit" class="btn">送信</button>
     </form>
     <Message :message="$data.inputData" />
   </div>
@@ -47,19 +50,72 @@ export default {
      */
     onSubmit(e) {
       e.preventDefault();
-      console.log(this.$data.name, this.$data.text);
-      socket.json.emit('send', {
-        name: this.$data.name,
-        text: this.$data.text,
-      });
+      if (this.$data.name && this.$data.text) {
+        console.log(this.$data.name, this.$data.text);
+        socket.json.emit('send', {
+          name: this.$data.name,
+          text: this.$data.text,
+        });
+      }
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+* {
+  outline: none;
+}
+
+.wrap {
+  margin: 20px;
+}
+
 .logo {
-  width: 40px;
+  width: 80px;
+}
+
+.header {
+  margin: 10px auto;
+  text-align: center;
+}
+
+.wrapInput {
+  height: 35px;
+}
+
+.inputTitle {
+  display: inline-block;
+  width: 80px;
+}
+
+form {
+  margin-left: 5%;
+}
+
+input {
+  padding: 5px;
+  border: solid 1px #ccc;
+  width: 250px;
+}
+
+input:focus {
+  border: solid 1px #eea34a;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #668ad8;
+  color: #fff;
+  border-bottom: solid 4px #627295;
+  border-radius: 3px;
+}
+
+.btn:active {
+  transform: translateY(4px);
+  border-bottom: none;
 }
 
 .sample {
